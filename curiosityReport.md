@@ -25,7 +25,6 @@ Linters fall under a category of software testing labeled “Static Analysis” 
 
 ![Abstract Syntax Tree for Euclidean Algorithm](https://upload.wikimedia.org/wikipedia/commons/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg)
 
-
 Source: [https://en.wikipedia.org/wiki/Abstract_syntax_tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
 If the linter finds difference in the defined rules and generated syntax tree, the linter will flag that difference and report it to the developer. While useful for finding errors defined by a pre-written set of rules for a specific language, linters also excel at finding stylistic errors by using rules written by the developer.
@@ -56,7 +55,7 @@ Overall Linters are useful tools for increasing developer productivity, ensuring
 
 Linters are especially useful when it comes to languages that are interpreted at runtime such as Python or JavaScript. ESLint is an industry standard linter when it comes to JavaScript code, which is particularly vulnerable to errors such as type compatibility issues. Released in 2013 by Nicholas C. Zakas, ESLint serves a tool to analyze JavaScript code and detect bugs. Many IDE’s now have it integrated into their system, allowing you to see Lint errors in real time and review an appropriate quick fix.
 
-![Source: [https://eslint.org/docs/latest/contribute/architecture/](https://eslint.org/docs/latest/contribute/architecture/)](Curiosity%20Report%201c710533111180238690dae2bdfa847d/image%201.png)
+![Source: [https://eslint.org/docs/latest/contribute/architecture/](https://eslint.org/docs/latest/contribute/architecture/)](https://eslint.org/docs/latest/assets/images/architecture/dependency.svg)
 
 Source: [https://eslint.org/docs/latest/contribute/architecture/](https://eslint.org/docs/latest/contribute/architecture/)
 
