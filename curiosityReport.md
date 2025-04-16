@@ -8,11 +8,9 @@ While only briefly used on the backend service of the jwt-pizza application, I f
 
 While researching linters, I discovered the that the term “lint” was coined by Stephen Johnson at Bell Labs while he was debugging C code. The original linter program was actually used to help him debug “yacc” grammar that he was writing in C. Debugging Yacc, which I discovered stands for Yet Another Compiler-Compiler, was proving to be difficult, and so Stephen came up with Lint to help him. In a 1978 document written by Johnson, he described some of the uses of his C Linter as follows:
 
-> *“It examines C source programs, detecting a number of bugs and obscurities. It enforces the type rules of C more strictly than the C compilers”*
-> 
+> _“It examines C source programs, detecting a number of bugs and obscurities. It enforces the type rules of C more strictly than the C compilers”_
 
-> *“Another option detects a number of wasteful, or error prone, constructions which nevertheless are, strictly speaking, legal.”*
-> 
+> _“Another option detects a number of wasteful, or error prone, constructions which nevertheless are, strictly speaking, legal.”_
 
 A linting tool was necessary because compilers were and are able to convert code into executable files with rapid speed, but they “do not do sophisticated type checking, especially between separately compiled programs” (Johnson).
 
@@ -22,10 +20,10 @@ Linters fall under a category of software testing labeled “Static Analysis” 
 
 1. The linter is given source code and it is then broken down into tokens (not necessary compiled)
 2. The linter then takes the tokens and constructs an Abstract Syntax Tree (pictured to the right)
-    1. Abstract Syntax Trees is a data structure used widely by compilers to examine different variables and tokens within a code snipped
+   1. Abstract Syntax Trees is a data structure used widely by compilers to examine different variables and tokens within a code snipped
 3. The linter compares the Abstract Syntax Tree against a set of defined rules for the language it is linting to find errors, unused variables, or incorrect syntax.
 
-![Source: [https://en.wikipedia.org/wiki/Abstract_syntax_tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)](Curiosity%20Report%201c710533111180238690dae2bdfa847d/image.png)
+![Source: [https://en.wikipedia.org/wiki/Abstract_syntax_tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)](https://en.wikipedia.org/wiki/File:Abstract_syntax_tree_for_Euclidean_algorithm.svg)
 
 Source: [https://en.wikipedia.org/wiki/Abstract_syntax_tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
@@ -33,65 +31,63 @@ If the linter finds difference in the defined rules and generated syntax tree, t
 
 ### Why use a Linter?
 
-In the case of jwt-pizza-service, a Linter was useful for identifying variables that were never used. In a more general sense, Linters first serve as an excellent way to control code quality. You can imagine a large code-base with hundreds of developers would get messy with different coding styles. Linters allow specific structure related rules to ensure developers are all writing code in the same manner and structure, making it easier to read or edit in the future. 
+In the case of jwt-pizza-service, a Linter was useful for identifying variables that were never used. In a more general sense, Linters first serve as an excellent way to control code quality. You can imagine a large code-base with hundreds of developers would get messy with different coding styles. Linters allow specific structure related rules to ensure developers are all writing code in the same manner and structure, making it easier to read or edit in the future.
 
 Linters also help catch errors in our code before execution. One example could be:
 
 ```jsx
-const fs = require('fs')
+const fs = require("fs");
 
-fs.readFile('foo.txt', 'utf8', (err, data) => {
-  console.log('data', data.toLowerCase())
-})
+fs.readFile("foo.txt", "utf8", (err, data) => {
+  console.log("data", data.toLowerCase());
+});
 ```
 
-While it may not be apparent to the runtime environment what the error is, or even to the developer, a Linter will let us know that the err does not get handled properly in this scenario. 
+While it may not be apparent to the runtime environment what the error is, or even to the developer, a Linter will let us know that the err does not get handled properly in this scenario.
 
 Interestingly, I found out that Linters are also crucial to enhancing the security of an application. According to an article written on the SonarSource website:
 
-> *“They* [ Linters ] *can be customized to specific security standards guaranteeing the source code meets industry or regulatory requirements and guidelines such as [OWASP Top 10](https://www.sonarsource.com/solutions/security/owasp/) and MISRA C++ 2023 to help protect applications from malicious attacks like SQL injection or cross-site scripting, buffer overflows, etc”*
-> 
+> _“They_ [ Linters ] _can be customized to specific security standards guaranteeing the source code meets industry or regulatory requirements and guidelines such as [OWASP Top 10](https://www.sonarsource.com/solutions/security/owasp/) and MISRA C++ 2023 to help protect applications from malicious attacks like SQL injection or cross-site scripting, buffer overflows, etc”_
 
-Overall Linters are useful tools for increasing developer productivity, ensuring code quality, and protecting applications from vulnerabilities. 
+Overall Linters are useful tools for increasing developer productivity, ensuring code quality, and protecting applications from vulnerabilities.
 
 ### ESLint
 
-Linters are especially useful when it comes to languages that are interpreted at runtime such as Python or JavaScript. ESLint is an industry standard linter when it comes to JavaScript code, which is particularly vulnerable to errors such as type compatibility issues. Released in 2013 by Nicholas C. Zakas, ESLint serves a tool to analyze JavaScript code and detect bugs. Many IDE’s now have it integrated into their system, allowing you to see Lint errors in real time and review an appropriate quick fix. 
+Linters are especially useful when it comes to languages that are interpreted at runtime such as Python or JavaScript. ESLint is an industry standard linter when it comes to JavaScript code, which is particularly vulnerable to errors such as type compatibility issues. Released in 2013 by Nicholas C. Zakas, ESLint serves a tool to analyze JavaScript code and detect bugs. Many IDE’s now have it integrated into their system, allowing you to see Lint errors in real time and review an appropriate quick fix.
 
 ![Source: [https://eslint.org/docs/latest/contribute/architecture/](https://eslint.org/docs/latest/contribute/architecture/)](Curiosity%20Report%201c710533111180238690dae2bdfa847d/image%201.png)
 
 Source: [https://eslint.org/docs/latest/contribute/architecture/](https://eslint.org/docs/latest/contribute/architecture/)
 
-The architecture of ESLint as pictured above from ESLint’s website, contains the entry point eslint.js, which they state is the file that gets executed when using the command line interface. 
+The architecture of ESLint as pictured above from ESLint’s website, contains the entry point eslint.js, which they state is the file that gets executed when using the command line interface.
 
-The CLI Engine object is responsible for managing the environment of the linter and reading the source code from the file system. It interacts directly with the linter object, which points to the source-code and rules. 
+The CLI Engine object is responsible for managing the environment of the linter and reading the source code from the file system. It interacts directly with the linter object, which points to the source-code and rules.
 
-The linter objects main method is `verify()` which accepts as arguments the source code on one side, and the rule configuration on the other side, to confirm if the code is up to standard. The linter is also responsible for generating the Abstract Syntax Tree from above in order to perform these comparisons. 
+The linter objects main method is `verify()` which accepts as arguments the source code on one side, and the rule configuration on the other side, to confirm if the code is up to standard. The linter is also responsible for generating the Abstract Syntax Tree from above in order to perform these comparisons.
 
-ESLint allows for flexibility on custom written rules. A structure of a custom rule from their website goes as follows: 
+ESLint allows for flexibility on custom written rules. A structure of a custom rule from their website goes as follows:
 
 ```jsx
 // customRule.js
 
 module.exports = {
-	meta: {
-		type: "suggestion",
-		docs: {
-			description: "Description of the rule",
-		},
-		fixable: "code",
-		schema: [], // no options
-	},
-	create: function (context) {
-		return {
-			// callback functions
-		};
-	},
+  meta: {
+    type: "suggestion",
+    docs: {
+      description: "Description of the rule",
+    },
+    fixable: "code",
+    schema: [], // no options
+  },
+  create: function (context) {
+    return {
+      // callback functions
+    };
+  },
 };
-
 ```
 
-ESLint also provides a way for you to see the performance and time a particular custom rule has by setting the TIMING variables in the CLI to 1. 
+ESLint also provides a way for you to see the performance and time a particular custom rule has by setting the TIMING variables in the CLI to 1.
 
 ### Conclusion
 
