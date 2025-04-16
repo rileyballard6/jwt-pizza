@@ -23,7 +23,8 @@ Linters fall under a category of software testing labeled “Static Analysis” 
    1. Abstract Syntax Trees is a data structure used widely by compilers to examine different variables and tokens within a code snipped
 3. The linter compares the Abstract Syntax Tree against a set of defined rules for the language it is linting to find errors, unused variables, or incorrect syntax.
 
-![Source: [https://en.wikipedia.org/wiki/Abstract_syntax_tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)](https://en.wikipedia.org/wiki/File:Abstract_syntax_tree_for_Euclidean_algorithm.svg)
+![Abstract Syntax Tree for Euclidean Algorithm](https://upload.wikimedia.org/wikipedia/commons/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg)
+
 
 Source: [https://en.wikipedia.org/wiki/Abstract_syntax_tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
